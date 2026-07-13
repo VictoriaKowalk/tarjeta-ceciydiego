@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Hemisferio Sur//Tarjeta Digital//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:boda-cecilia-diego-20270319@tarjeta-digital
+DTSTAMP:20260615T000000Z
+DTSTART:20270319T191500Z
+DTEND:20270320T080000Z
+SUMMARY:Boda de Cecilia y Diego
+DESCRIPTION:Celebramos nuestra boda y queremos compartirla con vos.
+LOCATION:Estancia Villa Maria, Ruta 205 Km 47
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-display: "Marcellus", serif;
+  --font-sans: "Montserrat", sans-serif;
+  
+  --color-ivory: #F8F5F0;
+  --color-sand: #D8C7B3;
+  --color-bluegray: #9BAFBA;
+  --color-taupe: #8B837C;
+  --color-sage: #B8C3B0;
+  --color-dark: #3A3632;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-dark);
+  }
+}
