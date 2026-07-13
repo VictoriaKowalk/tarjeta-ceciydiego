@@ -7,6 +7,7 @@ import {
   Pause,
   Play,
   Plus,
+  Share2,
   X,
 } from "lucide-react";
 import { FadeInSection } from "./FadeInSection";
@@ -590,6 +591,7 @@ export function MainScreen({ data, guestInfo }: MainScreenProps) {
   const [copiedHashtag, setCopiedHashtag] = useState(false);
   const [isGiftModalOpen, setIsGiftModalOpen] = useState(false);
   const [copiedCbu, setCopiedCbu] = useState(false);
+  const [copiedInvite, setCopiedInvite] = useState(false);
   const locations = [data.locations.civil, data.locations.party];
   const { scrollYProgress: heroScrollProgress } = useScroll({
     target: heroRef,
@@ -598,6 +600,8 @@ export function MainScreen({ data, guestInfo }: MainScreenProps) {
   const heroParallaxY = useTransform(heroScrollProgress, [0, 1], [0, 72]);
 
   const hashtagUrl = `https://www.instagram.com/explore/tags/${data.integrations.hashtag.replace("#", "")}/`;
+  const invitationUrl = "https://ceciydiego.estudiohs.com.ar/";
+  const invitationShareText = `Te compartimos la invitacion de ${data.couple.displayName}`;
 
   const copyHashtag = async () => {
     await navigator.clipboard.writeText(data.integrations.hashtag);
@@ -609,6 +613,23 @@ export function MainScreen({ data, guestInfo }: MainScreenProps) {
     await navigator.clipboard.writeText(data.gifts.cbu);
     setCopiedCbu(true);
     window.setTimeout(() => setCopiedCbu(false), 1800);
+  };
+
+  const shareInvitation = async () => {
+    const shareData = {
+      title: data.couple.displayName,
+      text: invitationShareText,
+      url: invitationUrl,
+    };
+
+    if (navigator.share) {
+      await navigator.share(shareData);
+      return;
+    }
+
+    await navigator.clipboard.writeText(`${invitationShareText}\n${invitationUrl}`);
+    setCopiedInvite(true);
+    window.setTimeout(() => setCopiedInvite(false), 1800);
   };
 
   return (
@@ -1018,6 +1039,14 @@ export function MainScreen({ data, guestInfo }: MainScreenProps) {
           <p className="text-sm tracking-[0.3em] font-sans uppercase text-white/80">
             {data.couple.shortName}
           </p>
+          <button
+            type="button"
+            onClick={shareInvitation}
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white/90 px-7 py-3 font-sans text-xs uppercase tracking-widest text-[#3A3632] shadow-md transition-colors duration-300 hover:bg-white"
+          >
+            <Share2 className="h-4 w-4" strokeWidth={1.75} />
+            {copiedInvite ? "Link copiado" : "Compartir invitacion"}
+          </button>
         </FadeInSection>
       </section>
 
